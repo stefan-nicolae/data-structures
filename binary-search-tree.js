@@ -74,7 +74,7 @@ class BinarySearchTree {
         printTree()
     }      
 
-    find(value) {
+    findValue(value) {
         const resultArr = []
         const propagate = (node = this.firstNode) => {
             if(node.value === value) resultArr.push(node)
