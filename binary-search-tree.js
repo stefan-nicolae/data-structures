@@ -75,9 +75,26 @@ class BinarySearchTree {
     }      
 
     find(value) {
-        const propagate = () => {
-            propagate
+        const resultArr = []
+        const propagate = (node = this.firstNode) => {
+            if(node.value === value) resultArr.push(node)
+            if(node.leftNode) propagate(node.leftNode)
+            if(node.rightNode) propagate(node.rightNode)
         }
+        propagate()
+        return resultArr
+    }
+
+    remove(node) {
+        const propagate = (node) => {
+            if(!node) return
+            if(node.leftNode) propagate(node.leftNode)
+            if(node.rightNode) propagate(node.rightNode)
+            delete node.value
+            delete node.leftNode
+            delete node.rightNode
+        }
+        propagate(node)
     }
 }
 
