@@ -74,6 +74,19 @@ export class DoubleLinkedList {
         }
     }
 
+    find(value) {
+        const recursive = (node = this.firstNode) => {
+            if(!node) {
+                console.error("List Empty")
+                return
+            }
+            if(node.value === value) return true
+            if(node.nextNode) return recursive(node.nextNode)
+            else return false
+        }
+        return recursive()
+    }
+
     toArray() {
         const arr = []
         const recursive = (node = this.firstNode) => {

@@ -30,7 +30,7 @@ class AdjacencyMatrix {
                 return false
             }
         } catch(err) {
-            console.err("Nodes not found")
+            console.error("Nodes not found")
             return false
         }
     }
@@ -47,33 +47,34 @@ class AdjacencyList {
     
     insert(node1, node2, twoWay=true) {
         if(!this.list[node1.ID]) this.list[node1.ID] = new DoubleLinkedList()
-        if(this.list[node1.ID].findValue(node2.ID)) return 
+        else if(this.list[node1.ID].find(node2.ID)) return        
         this.list[node1.ID].insert(node2.ID)
         if(twoWay) this.insert(node2, node1, false)
     }
 
-    // check(node1, node2, twoWay=true) {
-    //     try {
-    //         if(this.list[node1.ID] === node2.ID) {
-    //             if(!twoWay) {
-    //                 if(this.list[node2.ID] === node1.ID) return true 
-    //             } else {
-    //                 if(this.list[node2.ID] === node1.ID) return true
-    //             }
-    //             return false
-    //         }
-    //     } catch {
-    //         console.err("Nodes not found")
-    //         return false
-    //     }
-    // }
+    check(firstNodeID, secondNodeID, twoWay=true) {
+        try {
+            if(this.list[firstNodeID].find(secondNodeID)) {
+                if(!twoWay) {
+                    if(this.list[secondNodeID] && !this.list[secondNodeID].find(firstNodeID)) return true
+                } else {
+                    if(this.list[secondNodeID] && this.list[secondNodeID].find(firstNodeID)) return true
+                }
+                return false
+            }
+        } catch(err) {
+            console.log(err)
+            console.error("Nodes not found")
+            return false
+        }
+    }
 }
 
 // const test = new AdjacencyMatrix()
 // test.insert(new Node(1), new Node(2))
 // console.log(test.check(1, 2))
 
-const test1 = new AdjacencyList()
-test1.insert(new Node(1), new Node(2), false)
-console.log(test1.check(1, 2))
+// const test1 = new AdjacencyList()
+// test1.insert(new Node(1), new Node(2))
+// console.log(test1.check(1, 2))
 
