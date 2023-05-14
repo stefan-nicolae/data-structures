@@ -70,11 +70,11 @@ class AdjacencyList {
     }
 }
 
-// const test = new AdjacencyMatrix()
-// test.insert(new Node(1), new Node(2))
-// console.log(test.check(1, 2))
+const test = new AdjacencyMatrix()
+test.insert(new Node(1), new Node(2))
+console.log(test.check(1, 2))
 
-// const test1 = new AdjacencyList()
-// test1.insert(new Node(1), new Node(2))
-// console.log(test1.check(1, 2))
+const test1 = new AdjacencyList()
+test1.insert(new Node(1), new Node(2), false)
+console.log(test1.check(1, 2))
 

@@ -76,11 +76,10 @@ export class DoubleLinkedList {
 
     find(value) {
         const recursive = (node = this.firstNode) => {
-            if(!node) {
-                console.error("List Empty")
-                return
-            }
-            if(node.value === value) return true
+            if(!node) return false
+            if(node.value === value) return node
+            else if(typeof node.value === "object" && typeof value === "object" && 
+                JSON.stringify(node.value) === JSON.stringify(value)) return node
             if(node.nextNode) return recursive(node.nextNode)
             else return false
         }
@@ -100,8 +99,25 @@ export class DoubleLinkedList {
         }
         return recursive()
     }
+
+    remove(node) {
+        if(node.prevNode) {
+            if(node.nextNode) node.prevNode.nextNode = node.nextNode
+            else node.prevNode.nextNode = undefined
+        }
+        if(node.nextNode) {
+            if(node.prevNode) node.nextNode.prevNode = node.prevNode
+            else node.nextNode.prevNode = undefined
+        }
+        node.value = undefined
+        node.prevNode = undefined
+        node.nextNode = undefined
+    }   
 }
 
 // const linkedList = new DoubleLinkedList([1,23,34,234])
-// linkedList.insert(1, linkedList.firstNode.nextNode.nextNode)
+// // linkedList.insert(1, linkedList.firstNode.nextNode.nextNode)
 // console.log(linkedList.toArray())
+// linkedList.remove(linkedList.getNodeByIndex(2))
+// console.log(linkedList.toArray())
+// // console.log(linkedList.find(230))

@@ -74,7 +74,7 @@ class BinarySearchTree {
         printTree()
     }      
 
-    findValue(value) {
+    find(value) {
         const resultArr = []
         const propagate = (node = this.firstNode) => {
             if(node.value === value) resultArr.push(node)
@@ -107,4 +107,6 @@ for(let i = 0; i < 9; i++) {
     tree.insert(getRandomInt(9))
 }
 
+tree.remove(tree.firstNode.rightNode)
 tree.display()
+// console.log(tree.find(2))
