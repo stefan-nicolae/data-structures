@@ -74,6 +74,7 @@ class BinarySearchTree {
         printTree()
     }      
 
+    //breadth first search
     find(value) {
         const resultArr = []
         const propagate = (node = this.firstNode) => {
@@ -83,6 +84,32 @@ class BinarySearchTree {
         }
         propagate()
         return resultArr
+    }
+
+    //depth first search
+    find_DFS(value) {
+        const resultArr = []
+        const stack = []
+        const rightSearched = []
+        const leftSearched = []
+        const dive = (node = this.firstNode) => {
+            if(stack[stack.length - 1] !== node) stack.push(node)
+            if(node.value === value && !resultArr.includes(node)) resultArr.push(node)
+            if(node.leftNode && !leftSearched.includes(node)) { 
+                leftSearched.push(node)
+                return dive(node.leftNode) 
+            }
+            else if(node.rightNode && !rightSearched.includes(node)) {
+                rightSearched.push(node)
+                return dive(node.rightNode)
+            }
+            else {
+                stack.pop()
+                if(stack.length) return dive(stack[stack.length - 1])
+                else return resultArr
+            }
+        }
+        return dive()
     }
 
     remove(node) {
@@ -103,10 +130,10 @@ function getRandomInt(max) {
 }  
 
 const tree = new BinarySearchTree(4);
-for(let i = 0; i < 9; i++) {
+for(let i = 0; i < 4; i++) {
     tree.insert(getRandomInt(9))
 }
 
-tree.remove(tree.firstNode.rightNode)
+// tree.remove(tree.firstNode.rightNode)
 tree.display()
-// console.log(tree.find(2))
+console.log(tree.find_DFS(1))
