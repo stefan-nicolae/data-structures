@@ -74,7 +74,6 @@ class BinarySearchTree {
         printTree()
     }      
 
-    //breadth first search
     find(value) {
         const resultArr = []
         const propagate = (node = this.firstNode) => {
